@@ -9,15 +9,14 @@ var context;
 const maintTeam = 'website-maintain';
 const botMembers = ['elizabethhonest', 'hfla-website-checklist', 'HackforLABot'];
 
-// Set date limits: we are sorting inactive members into groups to warn after 1 month and remove after 2 months.
-// Since the website team takes off the month of December, the January 1st run is skipped (via `schedule-monthly.yml`). 
-// The February 1st run keeps the 1 month inactive warning, but changes removal to 3 months inactive (skipping December).
+// Set date limits: we are sorting inactive members into groups to notify after 1 month and remove after 2 months.  
+// Since the teams take off December and July, the Jan. 1st and Aug. 1st runs are skipped (via `schedule-monthly.yml`). 
+// The Feb. 1st and Sept. 1st runs account for skipped months: 'oneMonth' & 'twoMonths' = 1 & 3 months respectively
 let today = new Date();
-let oneMonth = (today.getMonth() == 1) ? 2 : 1;            // If month is "February" == 1, then oneMonth = 2 months ago
-let twoMonths = (today.getMonth() == 1) ? 3 : 2;           // If month is "February" == 1, then twoMonths = 3 months ago
+let twoMonths = (today.getMonth() === 1 || today.getMonth() === 8) ? 3 : 2;
 
-let oneMonthAgo = new Date();                              // oneMonthAgo instantiated with date of "today"
-oneMonthAgo.setMonth(oneMonthAgo.getMonth() - oneMonth);   // then set oneMonthAgo from "today"
+let oneMonthAgo = new Date();                       // oneMonthAgo instantiated with date of "today"
+oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);   // then set oneMonthAgo from "today"
 oneMonthAgo = oneMonthAgo.toISOString();
 let twoMonthsAgo = new Date();                               // twoMonthsAgo instantiated with date of "today"
 twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - twoMonths);  // then set twoMonthsAgo from "today"
@@ -37,7 +36,7 @@ async function main({ g, c }) {
   context = c;
 
   const [contributorsOneMonthAgo, contributorsTwoMonthsAgo, inactiveWithOpenIssue] = await fetchContributors(dates);
-  console.log('-------------------------------------------------------');
+  console.log(`-`.repeat(60));
   console.log('List of active contributors since ' + dates[0].slice(0, 10) + ':');
   console.log(contributorsOneMonthAgo);
 
@@ -106,8 +105,9 @@ async function fetchContributors(dates){
         if(contributorInfo.author){
           allContributorsSince[contributorInfo.author.login] = true;
         }
-        // Check for username in `user.login`, but skip `user.login` covered by 3rd API 
-        else if(contributorInfo.user  && api != 'GET /repos/{owner}/{repo}/issues'){
+
+        // Check for usernames in `user.login`, but only include `created_at` time, and skip `user.login` b/c covered by 3rd API 
+        else if(contributorInfo.user && contributorInfo.created_at > date && api != 'GET /repos/{owner}/{repo}/issues'){
           allContributorsSince[contributorInfo.user.login] = true;
         }
         // This check is done for `/issues` (3rd) API. Sometimes a user who created an issue is not the same as the 
@@ -122,10 +122,12 @@ async function fetchContributors(dates){
           if(responseObject.result === false){
             allContributorsSince[assignee] = true;
           } 
-          // If timeline is more than two months ago, add to open issues with inactive 
-          // comments with flag = true if issue is "Pre-work Checklist", false otherwise
-          else if(date === dates[1]){
-            if(contributorInfo.title.includes("Pre-work Checklist")){
+
+          // If timeline is more than two months ago, add to open issues with inactive. If issue title
+          // includes "Skills Issue" or "Pre-work Checklist", set flag to true, otherwise set to false
+          else if (date === dates[1]) {
+            const regex = /Pre-work checklist|Skills Issue/i;
+            if (regex.test(contributorInfo.title)) {
               inactiveWithOpenIssue[assignee] = [issueNum, true];
             } else {
               inactiveWithOpenIssue[assignee] = [issueNum, false];

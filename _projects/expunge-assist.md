@@ -1,12 +1,18 @@
 ---
 identification: '218391110'
 title: Expunge Assist
-description: 'Expunge Assist aims to help people in California with criminal records accomplish record clearance, expungement or reduction and subsequently a second chance as a part of society.
-<br /><br />We work with verifiable non-profits, the government and partners to build digital tools that can affect changes in the lives of these justice impacted individuals.'
+description: 'Expunge Assist is a free digital tool designed to aid Californians with arrest and conviction histories in clearing their criminal records. A personal statement is the most important proof of rehabilitation filed with an expungement petition. Our letter generator helps people write their statements to the court. The tool does not rely on AI, protects personal privacy, and does not store sensitive information. Community organizers, government agencies, and legal advocates in the clean slate and criminal justice fields are making an incredible impact. Expunge Assist aims to support that work.'
 image: /assets/images/projects/expunge-assist.png
 alt: 'Expunge Assist'
 image-hero: /assets/images/projects/expunge-assist-hero.png
 leadership:
+  - name: Maria Weissman
+    github-handle: mariaweissman
+    role: Product Manager, Project Manager
+    links:
+      slack: https://hackforla.slack.com/team/U06REA9H3FF
+      github: https://github.com/mariaweissman
+    picture: https://avatars.githubusercontent.com/mariaweissman
   - name: Analicia Mejia Mesinas
     github-handle: amejiamesinas
     role: Product Manager, UX Research
@@ -14,13 +20,13 @@ leadership:
       slack: https://hackforla.slack.com/team/U04J34E73CG
       github: https://github.com/amejiamesinas
     picture: https://avatars.githubusercontent.com/amejiamesinas
-  - name: Curtis Barber
-    github-handle: CBx3000
-    role: Product Manager, Content
+  - name: Srishti Gupta
+    github-handle: srishti-gupta-me
+    role: Product Manager, UX Content
     links:
-      slack: https://hackforla.slack.com/team/U05RZAETCQ4
-      github: https://github.com/CBx3000
-    picture: https://avatars.githubusercontent.com/CBx3000
+      slack: https://hackforla.slack.com/team/U07FF4C4YFQ
+      github: https://github.com/srishti-gupta-me
+    picture: https://avatars.githubusercontent.com/srishti-gupta-me    
   - name: Mireya V. Aviles
     github-handle: vanessaavviles
     role: Product Manager, Design
@@ -51,7 +57,7 @@ leadership:
     picture: https://avatars.githubusercontent.com/jyehllow
   - name: Samantha Hyler
     github-handle: SamHyler
-    role:  UX Content, Team Lead
+    role:  UX Content, Team Co-lead
     links:
       slack: https://hackforla.slack.com/team/U025XR6MY6S
       github: https://github.com/SamHyler
@@ -63,9 +69,27 @@ leadership:
       slack: https://hackforla.slack.com/team/U06E9RQ8DRA
       github: https://github.com/sylvia-nam
     picture: https://avatars.githubusercontent.com/sylvia-nam
+  - name: Rachel Ichniowski
+    github-handle: raeraeicky
+    role: Product Manager, UX Research
+    links:
+      slack: https://hackforla.slack.com/team/U07LGA7RZ0W
+      github: https://github.com/raeraeicky
+    picture: https://avatars.githubusercontent.com/raeraeicky
+  - name: Rick Peng
+    github-handle: rcpeng34
+    role: Product Manager, Development
+    links:
+      slack: https://hackforla.slack.com/team/U07QU3C45MY
+      github: https://github.com/rcpeng34
+    picture: https://avatars.githubusercontent.com/rcpeng34
 links:
+    - name: Overview
+      url: '../assets/pdfs/Expunge-Assist-One-Sheet.pdf'
     - name: GitHub
       url: 'https://github.com/hackforla/record-clearance/'
+    - name: Wiki
+      url:  'https://github.com/hackforla/expunge-assist/wiki'
     - name: Site
       url: https://expungeassist.org/
     - name: Readme
@@ -86,6 +110,13 @@ technologies:
 location:
   # - Santa Monica
   - Remote
+tools:
+  - Figma
+  - Miro
+  - Zoom
+  - Google Suite
+  - FigJam
+  - LettuceMeet
 visible: true
 program-area: 
   - Justice
